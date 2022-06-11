@@ -20,9 +20,10 @@ class StudentRepositoryImpl(
     @Dispatcher(LemonadeDispatchers.IO) private val ioDispatcher: CoroutineDispatcher
 ) : StudentRepository {
     override fun getStudent(): Flow<Resource<List<Student>>> = flow {
-        emit(Resource.Loading())
 
         val studentDao = database.studentDao()
+
+        emit(Resource.Loading())
 
         val cachedData = studentDao.readStudents().first()
 
