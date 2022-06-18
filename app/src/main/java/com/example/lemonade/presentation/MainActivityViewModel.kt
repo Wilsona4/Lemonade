@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.lemonade.data.remote.model.Student
 import com.example.lemonade.domain.repository.StudentRepository
 import com.example.lemonade.util.Resource
+import com.example.lemonade.util.exhausted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -62,7 +63,7 @@ class MainActivityViewModel @Inject constructor(
                     is Resource.Loading -> {
                         _uiState.update { it.copy(loading = true) }
                     }
-                }
+                }.exhausted
             }
         }
     }
